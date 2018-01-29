@@ -35,8 +35,10 @@ describe('ExclusiveGateway', () => {
       context.environment.set('condition1', true);
 
       const gateway = context.getChildActivityById('decision');
+      const activityApi = gateway.activate();
 
       gateway.outbound.find((f) => f.id === 'condFlow1').once('taken', () => {
+        activityApi.stop();
         done();
       });
 
@@ -195,7 +197,7 @@ describe('ExclusiveGateway', () => {
         gateway.inbound[0].take();
       });
 
-      it('emits error when no conditional flow was taken', (done) => {
+      it('emits error when no conditional flow is taken', (done) => {
         const definition = `
         <?xml version="1.0" encoding="UTF-8"?>
         <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

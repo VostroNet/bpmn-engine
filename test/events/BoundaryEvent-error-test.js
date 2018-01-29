@@ -7,6 +7,7 @@ const {Engine} = require('../..');
 const {EventEmitter} = require('events');
 
 describe('Error BoundaryEvent', () => {
+
   describe('behaviour', () => {
     const source = `
     <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -474,7 +475,7 @@ describe('Error BoundaryEvent', () => {
         <process id="interruptedProcess" isExecutable="true">
           <serviceTask id="service" implementation="\${services.test}" />
           <boundaryEvent id="errorEvent" attachedToRef="service">
-            <errorEventDefinition id="errorEventDef" errorRef="Error_0w1hljb" />
+            <errorEventDefinition errorRef="Error_0w1hljb" />
           </boundaryEvent>
           <endEvent id="end1" />
           <endEvent id="end2" />

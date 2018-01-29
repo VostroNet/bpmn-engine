@@ -1,9 +1,8 @@
 'use strict';
 
 const BpmnModdle = require('bpmn-moddle');
-const contextHelper = require('../../lib/context-helper');
 const debug = require('debug')('bpmn-engine:test');
-const Environment = require('../../lib/Environment');
+const contextHelper = require('../../lib/context-helper');
 const getOptionsAndCallback = require('../../lib/getOptionsAndCallback');
 const transformer = require('../../lib/transformer');
 
@@ -86,22 +85,13 @@ function getContext(processXml, optionsOrCallback, cb) {
   });
 }
 
-function context(source, options = {}) {
-  const moddleOptions = options.moddleOptions || {};
-  const {extensions} = options;
-
-  if (options.extensions) {
-    for (const key in extensions) {
-      moddleOptions[key] = extensions[key].moddleOptions;
-    }
-  }
-
+function context(source, options) {
   const Context = require('../../lib/Context');
   return new Promise((resolve, reject) => {
-    transformer.transform(source, moddleOptions, (err, definitions, moddleCtx) => {
+    transformer.transform(source, options, (err, definitions, moddleCtx) => {
       if (err) return reject(err);
       const ctxh = contextHelper(moddleCtx);
-      const ctx = Context(ctxh.getExecutableProcessId(), moddleCtx, Environment(options));
+      const ctx = Context(ctxh.getExecutableProcessId(), moddleCtx);
       return resolve(ctx);
     });
   });

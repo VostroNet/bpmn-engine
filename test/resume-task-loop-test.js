@@ -49,7 +49,7 @@ describe('Resume task loop', () => {
       engine2.once('end', () => {
         testHelpers.expectNoLingeringListenersOnEngine(engine2);
 
-        expect(startCount).to.equal(5);
+        expect(startCount).to.equal(8);
         done();
       });
     });
@@ -85,7 +85,7 @@ describe('Resume task loop', () => {
       const options = {
         listener,
         variables: {
-          list: [7, 3, 2, 1]
+          list: [9, 8, 7, 6, 5, 4, 3, 2, 1]
         },
         services: {
           loop: {

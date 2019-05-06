@@ -300,7 +300,7 @@ describe('task loop', () => {
             }
           },
           variables: {
-            input: [1, 2, 3, 7]
+            input: [1, 2, 3, 7, 9]
           }
         });
         engine.once('end', () => {
@@ -348,7 +348,7 @@ describe('task loop', () => {
             }
           },
           variables: {
-            input: [1, 2, 3, 7]
+            input: [1, 2, 3, 7, 9]
           }
         }, (err) => {
           if (err) return done(err);
